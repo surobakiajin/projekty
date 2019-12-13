@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head> 
+<link rel="stylesheet" type="text/css" href="/minesweeperCSS/minesweeper.css">
+    <title>Minesweeper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Minesweeper</h1>
+<div th:if="${@minesweeperController.solved}">
+Well played<br/>
+
+</div>
+<a href="/minesweeper">New Game</a><br/>
+<a href="/minesweeper/change">Change to mark/open</a><br/>
+ 
+<div th:utext="${@minesweeperController.HtmlField}"/>
+
+</body>
+</html>

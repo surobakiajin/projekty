@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Puzzle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Puzzle</h1>
+<a href="/puzzle">New Game</a><br/>
+<div th:if="${@puzzleController.solved}">
+You've solved the puzzle<br/>
+
+</div>
+ 
+ <div th:if="${not @puzzleController.solved}"/>	
+ 
+ <div th:utext="${@puzzleController.htmlField}"/>
+ </div>
+ 
+ 
+ 
+
+<img src="/img/puzzle/puzzle.jpg"/>
+</body>
+</html>
