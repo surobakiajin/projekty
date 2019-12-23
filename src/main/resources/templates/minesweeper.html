@@ -7,15 +7,60 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<a href="/">HOME (login,register,choose game))</a>
 <h1>Minesweeper</h1>
+
+<div th:if="${@mainController.logged}">
+You are logged as <span th:text="${@mainController.loggedPlayer.name}"/><br/>
+</div>
 <div th:if="${@minesweeperController.solved}">
 Well played<br/>
 
 </div>
+
+
+
+<div th:if="${not @minesweeperController.solved}">
+ <div th:utext="${@minesweeperController.HtmlField}"/>
+
+</div>
 <a href="/minesweeper">New Game</a><br/>
 <a href="/minesweeper/change">Change to mark/open</a><br/>
- 
-<div th:utext="${@minesweeperController.HtmlField}"/>
+ <h3>Scores</h3>
+<ol>
+
+<li th:each="score :${@minesweeperController.scores}">
+<span th:text="${score.username}"/>
+
+<span th:text="${score.value}"/>
+<!-- <span th:text=${score.game}"/> -->
+
+</li>
+</ol>
+
+
+<form action="/minesweeper/comment">
+				<input type="text" name="content" /><br />
+				
+					<input type="submit" value="Comment" />
+			</form>
+
+
+<h3>Comments</h3>
+<ul>
+
+<li th:each="comment :${@minesweeperController.comments}">
+<span th:text="${comment.username}"/> :
+
+<span th:text="${comment.content}"/>
+<!-- <span th:text=${score.game}"/> -->
+
+
+
+
+
+</li>
+</ul>
 
 </body>
 </html>

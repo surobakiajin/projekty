@@ -20,12 +20,12 @@ public class GuessNumber {
 		if (randomNumber > newSelNumber ) {
 			System.out.println("zadaj vacsie");
 		}
-			else 
+			else if(randomNumber < newSelNumber ) 
 				System.out.println("zadaj mensie");
-		
 		} while (randomNumber != newSelNumber);
 		 
-		
-              
+		System.out.println("Congrats you won");    
 	}
+	
+ 
 	}

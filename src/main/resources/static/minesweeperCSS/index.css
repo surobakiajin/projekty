@@ -1,0 +1,19 @@
+h1 {text-align: center;
+}
+.daco 
+{
+	width: 140px;
+}
+
+
+body{
+background-image: url('/img/puzzle/bkk.jpg');
+background-repeat: none;
+background-size: cover;
+
+	}
+	
+	
+.daco:hoover {
+	width: 160px;
+	}

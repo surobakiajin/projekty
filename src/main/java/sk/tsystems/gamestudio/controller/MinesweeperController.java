@@ -1,20 +1,37 @@
 package sk.tsystems.gamestudio.controller;
 
 import java.util.Formatter;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.WebApplicationContext;
 
 import sk.tsystems.gamestudio.consoleui.Minesweeper.consoleui.ConsoleUI;
 import sk.tsystems.gamestudio.consoleui.Minesweeper.core.Clue;
 import sk.tsystems.gamestudio.consoleui.Minesweeper.core.Field;
 import sk.tsystems.gamestudio.consoleui.Minesweeper.core.Mine;
 import sk.tsystems.gamestudio.consoleui.Minesweeper.core.Tile;
+import sk.tsystems.gamestudio.entity.Comment;
+import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.service.CommentService;
+import sk.tsystems.gamestudio.service.ScoreService;
 
 @Controller
+@Scope(WebApplicationContext.SCOPE_SESSION)
 public class MinesweeperController {
 	private Field field ;
  private boolean marking;
+ @Autowired
+ private ScoreService scoreService;
+
+ @Autowired
+	private CommentService commentService;
+ 
+	@Autowired
+	private MainController mainController;
 
 	@RequestMapping("/minesweeper")
 	public String index() {
@@ -26,20 +43,11 @@ public class MinesweeperController {
 	
 	
 
-
-
-
-
 	@RequestMapping("/minesweeper/change")
 	public String change() {
 		marking =!marking;
 		return "minesweeper";
 	}
-
-	  
-
-	
-	
 	 
 
 	@RequestMapping("/minesweeper/open")
@@ -48,6 +56,9 @@ public class MinesweeperController {
 			field.markTile(row, column);
 		}
 		else{field.openTile(row,column);
+		if(field.isSolved()&& mainController.isLogged()) {
+			scoreService.addScore(new Score(mainController.getLoggedPlayer().getName(), "minesweeper", 10));
+		}
 		
 	}return "minesweeper";
 	}
@@ -90,7 +101,9 @@ public class MinesweeperController {
 	}
 
 	
- 
+	public List<Score> getScores(){
+		return scoreService.getTopScores("minesweeper");
+	}
 
 
  
@@ -102,4 +115,16 @@ public class MinesweeperController {
 //	public String getMessage() {
 //		return "Hello from Java";
 //	}
+	
+	@RequestMapping("/minesweeper/comment")
+	public String comment(String content) {
+		if (mainController.isLogged()) {
+			commentService.addComment(new Comment(mainController.getLoggedPlayer().getName(), "minesweeper", content));
+		}
+		return "minesweeper";
+	}
+	
+	public List<Comment> getComments() {
+		return commentService.getTopComments("minesweeper");
+	}
 }

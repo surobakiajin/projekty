@@ -1,25 +1,86 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <title>Puzzle</title>
+<link rel="stylesheet" type="text/css" href="/minesweeperCSS/puzzle.css">    
+<title>Puzzle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+   
 </head>
 <body>
-<h1>Puzzle</h1>
+<a href="/">HOME (login,register,choose game))</a>
+<div class="container">
+		<div class="row">
+ <h1>Puzzle</h1>
 <a href="/puzzle">New Game</a><br/>
 <div th:if="${@puzzleController.solved}">
-You've solved the puzzle<br/>
 
+You've solved the puzzle
+  </div><br/>
+<div th:if="${@mainController.logged}">
+You are logged as <span th:text="${@mainController.loggedPlayer.name}"/><br/>
+</div>
 </div>
  
  <div th:if="${not @puzzleController.solved}"/>	
  
  <div th:utext="${@puzzleController.htmlField}"/>
- </div>
+
+ <img src="/img/puzzle/puzzle.jpg"/>
  
+ <h3>Rating</h3>
+<form action="/puzzle/rating">
+<input type="number" name="rate" class="input_field" autofocus>
+<input type="submit" value="rate" class="login_button">
+</form>
  
+<p>Rating this game: <span th:text="${@puzzleController.ratings}"></span></p>
+
+<h3>Scores</h3>
+<ol>
+
+<li th:each="score :${@puzzleController.scores}">
+<span th:text="${score.username}"/>
+
+<span th:text="${score.value}"/>
+<!-- <span th:text=${score.game}"/> -->
+</li>
+</ol>
+
+<form action="/puzzle/comment" method="post">
+				<input type="text" name="content" />
+				
+					<input type="submit" value="Comment" />
+			</form>
+			</div>
+ 
+<h3>Comments</h3>
+<ul>
+<li th:each="comment :${@puzzleController.comments}">
+<span th:text="${comment.username}"/> :
+
+<span th:text="${comment.content}"/>
+<!-- <span th:text=${score.game}"/> -->
+
+
+
+
+
+</li>
+</ul>
+
+
  
 
-<img src="/img/puzzle/puzzle.jpg"/>
+ 
+
+
+
+
+
+
+
+</div>
+</div>
 </body>
 </html>

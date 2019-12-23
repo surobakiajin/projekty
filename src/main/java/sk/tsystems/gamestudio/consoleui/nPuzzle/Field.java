@@ -38,7 +38,7 @@ public class Field {
 	public void shuffle() {
 		int tileNumber;
 		Random random = new Random();
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 3; i++) {
 			tileNumber = random.nextInt(rowCount * columnCount - 1) + 1;
 			move(tileNumber);
 		}

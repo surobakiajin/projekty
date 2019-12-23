@@ -1,0 +1,23 @@
+<!DOCTYPE HTML> 
+<head>     
+<link rel="stylesheet" type="text/css" href="/minesweeperCSS/russianRouette.css">  
+<title>RussianRoulette</title>  
+
+</head>
+<body>
+<a href="/">HOME (login,register,choose game))</a>
+ 
+ <h1>RussianRoulette</h1>
+<a href="/russianRoulette">Reborn</a><br/>
+ <div th:if="${@RRController.alive}">
+  <img  class="zbran" src="/img/puzzle/gun1.jpg"/>
+ <a href="/russianRoulette/shoot">SHOOT</a>
+ </div>
+  <div th:if="${not @RRController.alive}">
+   <img  class="zbran" src="/img/puzzle/nirvana.jpg"/>
+  </div>
+  
+</body>
+</html>
+
+ 

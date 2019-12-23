@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+<link rel="stylesheet" type="text/css" href="/minesweeperCSS/guess.css">    
+<title>Guess</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<a href="/">HOME (login/register/choose game))</a>
+<h1>Guess number</h1>
+<a href="/guess">New Game</a><br/>
+<div>I think of a number between 1-10</div>
+<div>
+<form action="/guess/input">
+    <input type="text" name="answer" />
+    <input type="submit" value="I guess it's this number" />
+ </form>
+ 
+ <span th:text="${@guessController.message}"/>
+ </div>
+</body>
+</html>
